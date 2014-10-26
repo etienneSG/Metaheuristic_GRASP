@@ -24,10 +24,13 @@ public:
    * @param iMutationRate   : Mutation rate at each generation
    * @param iTransmitionRate: Rate of genes transmitted by the worst parent
    */
-  Genetic(int iPopSize, Localisation ** iapLocalisation, int iMutationRate, int iTransmitionRate);
+  Genetic(int iPopSize, Localisation ** iapLocalisation, double iMutationRate, double iTransmitionRate);
   
   /** Destructor */
   ~Genetic();
+  
+  /** Return the best localisation of the population */
+  Localisation * GetBestLocalisation();
   
   /** Perform genetic algorithm */
   void Algorithm();

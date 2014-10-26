@@ -249,6 +249,7 @@ void Localisation::LocalSearchAlgorithm(int iMaxSize)
 void Localisation::PrintChosenFactories()
 {
   int i;
+  std::cout.precision(15);
   std::cout << "Chosen factories : (cost " << ComputeLocalisationCost() << ")" << std::endl;
   for (i = 0; i <_pInstance->NbFactories(); i++) {
     std::cout << _aChosenFactories[i] << " ";

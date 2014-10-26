@@ -4,6 +4,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+#ifndef INFINITY
+#define INFINITY 1e+50
+#endif
+
+
 Genetic::Genetic() :
   _PopSize(0),
   _apLoc (0),
@@ -13,7 +19,7 @@ Genetic::Genetic() :
 }
 
 
-Genetic::Genetic(int iPopSize, Localisation ** iapLocalisation, int iMutationRate, int iTransmitionRate) :
+Genetic::Genetic(int iPopSize, Localisation ** iapLocalisation, double iMutationRate, double iTransmitionRate) :
   _PopSize(iPopSize),
   _apLoc(iapLocalisation),
   _MutationRate(iMutationRate),
@@ -30,13 +36,30 @@ Genetic::~Genetic()
 }
 
 
+Localisation * Genetic::GetBestLocalisation()
+{
+  int IdxBestLoc = -1;
+  double BestCost = INFINITY;
+  int i;
+  for (i = 0; i < _PopSize; i++)
+  {
+    if (BestCost > _apLoc[i]->GetLocalisationCost())
+    {
+      IdxBestLoc = i;
+      BestCost = _apLoc[i]->GetLocalisationCost();
+    }
+  }
+  return IdxBestLoc==-1 ? 0 : _apLoc[IdxBestLoc];
+}
+
+
 void Genetic::Algorithm()
 {
   int Compt = 0;        // Number of generations
   double Average = 0;   // Average of cost
   double MeanDiff = 1;  // Mean difference of the costs in the population
 
-  while(Compt<1000 && MeanDiff > 0.1) 
+  while(Compt<1000 && MeanDiff > 0.005) 
   {
     Compt++;
     // Create the list of individuals to cross. (Shuffle the indexes)
@@ -65,7 +88,7 @@ void Genetic::Algorithm()
       }
 
       // Mutation
-      if (rand()/RAND_MAX < _MutationRate)
+      if (rand()*1./RAND_MAX < _MutationRate)
 	Individual2->Complement( rand()%_apLoc[0]->GetNbFactories() );
     
       // Update the cost of Individual2

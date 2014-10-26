@@ -28,7 +28,7 @@ public:
    *    If null, every factory is initialize with false.
    */
   Localisation(Testio &iInstance, bool* iChosenFactories = 0);
-
+  
   /** Destructor */
   ~Localisation();
   
