@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 2.6)
+
+#Déclaration du projet
+project(MPRO_GRASP)
+set(EXECUTABLE_OUTPUT_PATH Bin)
+
+#Génération de la liste des fichiers sources
+file(
+	GLOB_RECURSE
+        header_files
+        Include/*
+)
+
+file(
+        GLOB_RECURSE
+        source_files
+        Src/*
+)
+
+include_directories(Include/)
+
+#Déclaration de l'exécutable
+add_executable(
+        MonExec
+	main.cpp
+	${header_files}
+        ${source_files}
+)
