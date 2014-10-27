@@ -38,6 +38,24 @@ Localisation::Localisation(Testio &iInstance, bool* iChosenFactories):
 }
 
 
+Localisation::Localisation(Localisation &iLoc):
+  _pInstance(iLoc._pInstance),
+  _aChosenFactories(0),
+  _LastAddedFactory(iLoc._LastAddedFactory),
+  _ActualLocalisationCost(iLoc._ActualLocalisationCost)
+{
+  int nbFactories = _pInstance->NbFactories();
+  if (nbFactories) {
+    _aChosenFactories = new bool[nbFactories];
+    if (iLoc._aChosenFactories)
+      memcpy(_aChosenFactories, iLoc._aChosenFactories, nbFactories*sizeof(bool));
+    else
+      memset(_aChosenFactories, 0, nbFactories*sizeof(bool));
+  }
+}
+
+
+
 Localisation::~Localisation()
 {
   if (_aChosenFactories)
@@ -255,5 +273,53 @@ void Localisation::PrintChosenFactories()
     std::cout << _aChosenFactories[i] << " ";
   }
   std::cout << std::endl;
+}
+
+
+bool IsEqual(Localisation &iLoc1, Localisation &iLoc2)
+{
+  int NbFactories = iLoc1.GetNbFactories();
+  if (iLoc2.GetNbFactories()!=NbFactories)
+    return false;
+
+  int i;
+  for (i = 0; i < NbFactories; i++)
+  {
+    if (iLoc1(i)!=iLoc2(i))
+      return false;
+  }
+  return true;
+}
+
+
+void exchange(Localisation ** tab, int a, int b)
+{
+    Localisation * temp = tab[a];
+    tab[a] = tab[b];
+    tab[b] = temp;
+}
+
+
+void QuickSort(Localisation ** iapLoc, int iBegin, int iEnd)
+{
+    int left = iBegin-1;
+    int right = iEnd+1;
+    Localisation * pivot = iapLoc[iBegin];
+
+    if(iBegin >= iEnd)
+        return;
+
+    while(1)
+    {
+        do right--; while( pivot->GetLocalisationCost() < iapLoc[right]->GetLocalisationCost() );
+        do left++; while( iapLoc[left]->GetLocalisationCost() < pivot->GetLocalisationCost() );
+
+        if(left < right)
+            exchange(iapLoc, left, right);
+        else break;
+    }
+
+    QuickSort(iapLoc, iBegin, right);
+    QuickSort(iapLoc, right+1, iEnd);
 }
 

@@ -10,6 +10,7 @@
 
 #include "testio.h"
 #include <assert.h>
+#include <iostream>
 
 
 class Localisation
@@ -28,6 +29,12 @@ public:
    *    If null, every factory is initialize with false.
    */
   Localisation(Testio &iInstance, bool* iChosenFactories = 0);
+  
+  /**
+   * Copy constructor
+   * @param iLoc: Localisation to copy
+   */
+  Localisation(Localisation &iLoc);
   
   /** Destructor */
   ~Localisation();
@@ -67,10 +74,10 @@ public:
   /** Compute the cost of the localisation */
   double ComputeLocalisationCost();
 
-  /** */
+  /** Return the number of factories in the localisation */
   inline int GetNbFactories();
   
-  /** */
+  /** Return the cost of the localisation (without recalculate it) */
   inline double GetLocalisationCost();
   
   /**
@@ -105,9 +112,22 @@ protected:
 };
 
 
+/** Check if the localisations have the same chosen factories */
+bool IsEqual(Localisation &iLoc1, Localisation &iLoc2);
+
+/**
+ * Sort a array of localisations
+ * @param iapLoc: array of pointers on localisations
+ * @param iBegin: index of begining of the array
+ * @param iEnd  : index of end of the array
+ */
+void QuickSort(Localisation ** iapLoc, int iBegin, int iEnd);
+
+
 //==============================================================================
 // Implementation of inline methods
 //==============================================================================
+
 
 inline void Localisation::Complement(int iFactory) {
   assert(0 <= iFactory && iFactory < _pInstance->NbFactories());

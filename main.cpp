@@ -11,52 +11,7 @@
 #include "kcombinationiterator.h"
 #include "genetic.h"
 #include "kcombination.h"
-
-
-/**
- * Look for the best solution using the GRASP metaheuristics
- * and completing it with a genetic algorithm on the population.
- * @param iFile      : instance of the problem
- * @param iPopSize   : Size of the population of solution to generate and use
- * @param iMaxHamming: Maximal size of the Hamming distance in the neighbourhood search
- */
-void GRASP(std::string iFile, int iPopSize, int iMaxHamming)
-{
-  Testio myTestio(iFile);
-  Localisation ** myArrayLoc = iPopSize ? new Localisation*[iPopSize] : 0;
-  
-  // Creation of the population
-  //#pragma omp parallel for schedule(dynamic,3)
-  for (int i = 0; i < iPopSize; i++)
-  {
-    myArrayLoc[i] = new Localisation(myTestio);
-    myArrayLoc[i]->Construction(iMaxHamming);
-    //myArrayLoc[i]->LocalSearchAlgorithm(iMaxHamming);
-  }
-  
-  // Genetic algorithm performed on the population
-  Genetic myGenetic(iPopSize, myArrayLoc, 0.3, 0.5);
-  myGenetic.Algorithm();
-  
-  // Local search around the best solution of the population
-  Localisation * BestLoc = myGenetic.GetBestLocalisation();
-  BestLoc->LocalSearchAlgorithm(iMaxHamming);
-  
-  BestLoc->PrintChosenFactories();
-  
-  // Clear memory
-  if (myArrayLoc)
-  {
-    int j;
-    for (j = 0; j < iPopSize; j++) {
-      if (myArrayLoc[j])
-	delete myArrayLoc[j];
-      myArrayLoc[j] = 0;
-    }
-    delete [] myArrayLoc; myArrayLoc = 0;
-  }
-
-}
+#include "grasp.h"
 
 
 /** Mets tes tests dedans Tristan :) */
@@ -112,16 +67,17 @@ int main (int argc, char const *argv[]){
   /* initialize random seed: */
   srand (time(NULL));
   
-  Kcombination myComb(17,18);
-  myComb.Random();
-  myComb.Print();
-  myComb.Random();
-  myComb.Print();
-  myComb.Random();
-  myComb.Print();
-  myComb.Random();
-  myComb.Print();
-  GRASP("TestCases/Input/capa.txt", 18, 3);
+  std::string Instance = "TestCases/Input/cap104.txt";
+  int PopSize = 18;
+  int MaxHamming = 3;
+  int RCLLength = 3;
+  double MutationRate = 0.5;
+  double TransmitionRate = 0.3;
+
+  GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate);
+  myGRASP.Construction();
+  myGRASP.GeneticAlgorithm();
+  myGRASP.PrintBestLocalisation();
 
   //Test_Tristan();
   //Test_Etienne();

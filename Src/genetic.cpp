@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 
 
 #ifndef INFINITY
@@ -43,7 +44,7 @@ Localisation * Genetic::GetBestLocalisation()
   int i;
   for (i = 0; i < _PopSize; i++)
   {
-    if (BestCost > _apLoc[i]->GetLocalisationCost())
+    if (_apLoc[i] && BestCost > _apLoc[i]->GetLocalisationCost())
     {
       IdxBestLoc = i;
       BestCost = _apLoc[i]->GetLocalisationCost();
@@ -55,6 +56,26 @@ Localisation * Genetic::GetBestLocalisation()
 
 void Genetic::Algorithm()
 {
+  // Error detection
+  if (!_apLoc)
+  {
+    std::cout << "Population is empty : you have not built it. Do it before perform genetic algorithm.\n";
+    return;
+  }
+  else
+  {
+    int i;
+    for (i = 0; i < _PopSize; i++)
+    {
+      if (!_apLoc[i])
+      {
+	std::cout << "Localisation " << i << " was not built. Do it before perform genetic algorithm.\n";
+	return;
+      }
+    }
+  }
+
+
   int Compt = 0;        // Number of generations
   double Average = 0;   // Average of cost
   double MeanDiff = 1;  // Mean difference of the costs in the population
