@@ -12,6 +12,8 @@
 #include "genetic.h"
 #include "kcombination.h"
 #include "grasp.h"
+#include "traces.h"
+
 
 
 /** Mets tes tests dedans Tristan :) */
@@ -67,6 +69,8 @@ int main (int argc, char const *argv[]){
   /* initialize random seed: */
   srand (time(NULL));
   
+  Traces myTraces;
+
   std::string Instance = "TestCases/Input/cap104.txt";
   int PopSize = 18;
   int MaxHamming = 3;
@@ -75,10 +79,17 @@ int main (int argc, char const *argv[]){
   double TransmitionRate = 0.3;
 
   GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate);
+  myTraces._BeginPopBuilt_UserTime = clock();
   myGRASP.Construction();
+  myTraces._EndPopBuilt_UserTime = clock();
+
+  myTraces._BeginGenetic_UserTime = clock();
   myGRASP.GeneticAlgorithm();
+  myTraces._EndGenetic_UserTime = clock();
+
   myGRASP.PrintBestLocalisation();
 
+  myTraces.PostTreatment();
   //Test_Tristan();
   //Test_Etienne();
   
