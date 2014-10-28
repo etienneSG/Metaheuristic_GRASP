@@ -11,15 +11,12 @@
 #include "testio.h"
 #include <assert.h>
 #include <iostream>
-
+#include "traces.h"
 
 class Localisation
 {
 public:
-  /**
-   * Constructor
-   * @param iNbFactories: number of factories in the model
-   */
+  /** Constructor */
   Localisation();
   
   /**
@@ -27,8 +24,9 @@ public:
    * @param iInstance       : Instance of the problem
    * @param iChosenFactories: Array of chosen factories. 
    *    If null, every factory is initialize with false.
+   * @param ipTraces        : Traces of the execution
    */
-  Localisation(Testio &iInstance, bool* iChosenFactories = 0);
+  Localisation(Testio &iInstance, bool* iChosenFactories, Traces * ipTraces);
   
   /**
    * Copy constructor
@@ -71,8 +69,11 @@ public:
    */
   double MinDistance(int iClient);
 	
-  /** Compute the cost of the localisation */
-  double ComputeLocalisationCost();
+  /**
+   * Compute the cost of the localisation
+   * @param iUpdate: if true actualize the member _AcutlLocalisationCost
+   */
+  double ComputeLocalisationCost(bool iUpdate = false);
 
   /** Return the number of factories in the localisation */
   inline int GetNbFactories();
@@ -109,6 +110,9 @@ protected:
   bool* _aChosenFactories;        // Array of chosen factories
   int _LastAddedFactory;          // Last factory added during the greedy construction
   double _ActualLocalisationCost; // Cost of the localisation
+  
+public:
+  Traces * _pTraces; // Traces of the execution
 };
 
 

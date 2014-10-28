@@ -1,6 +1,5 @@
 #include <stdio.h>   // Standard Input/Output Header
 #include <stdlib.h>  // C Standard General Utilities Library
-#include <omp.h>     // Open Multi-Processing Library
 #include <algorithm>
 #include <iostream>
 #include <time.h>    //time
@@ -20,7 +19,9 @@
 void Test_Tristan()
 {
   Testio myTestio("TestCases/Input/cap71.txt");
-  Localisation myLoc(myTestio);
+  Traces myTraces;
+  myTraces.Initialize(10, myTestio.NbFactories());
+  Localisation myLoc(myTestio, 0, &myTraces);
   for (int i = 0; i < myTestio.NbFactories(); i++) {
     std::cout << myTestio.ImplantationCost(i) << std::endl;
   }
@@ -35,6 +36,8 @@ void Test_Tristan()
 /** Mets tes tests dedans Etienne :) */
 void Test_Etienne()
 {
+/*
+  int a;
   Testio myTestio("TestCases/Input/cap71.txt");
   Localisation ** myArrayLoc = new Localisation*[18];
   //#pragma omp parallel for schedule(dynamic,3)
@@ -44,24 +47,24 @@ void Test_Etienne()
     myArrayLoc[i]->Construction(3);
     //myArrayLoc[i]->LocalSearchAlgorithm(3);
   }
-  Genetic myGenetic(myTestio.NbFactories(), myArrayLoc, 0.3, 0.5);
+  Genetic myGenetic(myTestio.NbFactories(), myArrayLoc, 0.3, 0.5, 1000, 0.001);
   myGenetic.Algorithm();
-
-  /*
-    while (!I.IsEnded())
-    {
-      std::cout << I(0) << I(1) << I(2) << std::endl;
-      I.Print();
-      ++I;
-    }
-    printf("Nombre de processeurs : %d \n",omp_get_num_procs());
-    printf("Nombre de thread actifs : %d \n",omp_get_num_threads());
-    int n;
-    #pragma omp parallel for schedule(dynamic,2)
-    for(n=0;n<18;n++){
-      printf("Element %d traité par le thread %d \n",n,omp_get_thread_num());
-    }
-  */
+  
+  
+  while (!I.IsEnded())
+  {
+    std::cout << I(0) << I(1) << I(2) << std::endl;
+    I.Print();
+    ++I;
+  }
+  printf("Nombre de processeurs : %d \n",omp_get_num_procs());
+  printf("Nombre de thread actifs : %d \n",omp_get_num_threads());
+  int n;
+  #pragma omp parallel for schedule(dynamic,2)
+  for(n=0;n<18;n++){
+    printf("Element %d traité par le thread %d \n",n,omp_get_thread_num());
+  }
+*/
 }
 
 
@@ -69,31 +72,33 @@ int main (int argc, char const *argv[]){
   /* initialize random seed: */
   srand (time(NULL));
   
-  Traces myTraces;
-
   std::string Instance = "TestCases/Input/cap104.txt";
   int PopSize = 18;
-  int MaxHamming = 3;
+  int MaxHamming = 1;
   int RCLLength = 3;
   double MutationRate = 0.5;
-  double TransmitionRate = 0.3;
-
-  GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate);
-  myTraces._BeginPopBuilt_UserTime = get_wall_time();
-  myTraces._BeginPopBuilt_CPUTime = get_cpu_time();
+  double TransmitionRate = 0.0;
+  int MaxNbGenerations = 100;
+  int InfMeanDiff = 0.001;
+  Traces ExecTraces;
+  ExecTraces.Initialize(PopSize, MaxNbGenerations);
+  
+  GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate, MaxNbGenerations, InfMeanDiff, &ExecTraces);
+  ExecTraces._BeginPopBuilt_UserTime = get_wall_time();
+  ExecTraces._BeginPopBuilt_CPUTime = get_cpu_time();
   myGRASP.Construction();
-  myTraces._EndPopBuilt_CPUTime = get_cpu_time();
-  myTraces._EndPopBuilt_UserTime = get_wall_time();
-
-  myTraces._BeginGenetic_UserTime = get_wall_time();
-  myTraces._BeginGenetic_CPUTime = get_cpu_time();
+  ExecTraces._EndPopBuilt_CPUTime = get_cpu_time();
+  ExecTraces._EndPopBuilt_UserTime = get_wall_time();
+  
+  ExecTraces._BeginGenetic_UserTime = get_wall_time();
+  ExecTraces._BeginGenetic_CPUTime = get_cpu_time();
   myGRASP.GeneticAlgorithm();
-  myTraces._EndGenetic_CPUTime = get_cpu_time();
-  myTraces._EndGenetic_UserTime = get_wall_time();
-
+  ExecTraces._EndGenetic_CPUTime = get_cpu_time();
+  ExecTraces._EndGenetic_UserTime = get_wall_time();
+  
   myGRASP.PrintBestLocalisation();
-
-  myTraces.PostTreatment();
+  
+  ExecTraces.PostTreatment();
   //Test_Tristan();
   //Test_Etienne();
   

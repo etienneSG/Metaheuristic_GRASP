@@ -3,21 +3,21 @@
 #include <iostream>
 
 KcombinationIterator::KcombinationIterator():
-  _k(0),
-  _n(0)
+_k(0),
+_n(0)
 {
 }
 
 
 KcombinationIterator::KcombinationIterator(int iK,int iN):
-  _k(iK),
-  _n(iN),
-  _v(iK+1,iN)
+_k(iK),
+_n(iN),
+_v(iK+1,iN)
 {
   for (int i = 0; i < iK+1; i++)
     _v[i]=i-1;
 }
- 
+
 
 KcombinationIterator::~KcombinationIterator()
 {

@@ -3,18 +3,18 @@
 #include <string.h>
 
 
-Array2d::Array2d()
-: _NbRow(0),
-  _NbColumn(0),
-  _aTab(0)
+Array2d::Array2d():
+_NbRow(0),
+_NbColumn(0),
+_aTab(0)
 {
 }
 
 
 Array2d::Array2d(int iNbRow, int iNbColumn):
-  _NbRow(iNbRow),
-  _NbColumn(iNbColumn),
-  _aTab(0)
+_NbRow(iNbRow),
+_NbColumn(iNbColumn),
+_aTab(0)
 {
   int nbBox = _NbRow*_NbColumn;
   if (nbBox>0)

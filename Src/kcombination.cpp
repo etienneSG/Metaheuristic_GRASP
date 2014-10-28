@@ -5,17 +5,17 @@
 #include <iostream>
 
 Kcombination::Kcombination() :
-  _k(0),
-  _n(0),
-  _a(0)
+_k(0),
+_n(0),
+_a(0)
 {
 }
 
 
 Kcombination::Kcombination(int iK,int iN) :
-  _k(iK),
-  _n(iN),
-  _a(0)
+_k(iK),
+_n(iN),
+_a(0)
 {
   if (_n > 0)
   {
