@@ -9,7 +9,7 @@
 #ifndef TRACE_H
 #define TRACE_H
 
-#include <time.h>
+#include "timetools.h"
 
 
 class Traces
@@ -28,16 +28,25 @@ public:
   // Construction of the population
   
   // Lenght (User time)
-  clock_t _BeginPopBuilt_UserTime;
-  clock_t _EndPopBuilt_UserTime;
+  double _BeginPopBuilt_UserTime;
+  double _EndPopBuilt_UserTime;
+  
+  // Lenght (CPU time)
+  double _BeginPopBuilt_CPUTime;
+  double _EndPopBuilt_CPUTime;
   
 
   //==================================================
   // Genetic Algorithm
   
   // Lenght (time)
-  clock_t _BeginGenetic_UserTime;
-  clock_t _EndGenetic_UserTime;
+  double _BeginGenetic_UserTime;
+  double _EndGenetic_UserTime;
+  
+  // Lenght (time)
+  double _BeginGenetic_CPUTime;
+  double _EndGenetic_CPUTime;
+  
 };
 
 

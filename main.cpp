@@ -79,13 +79,17 @@ int main (int argc, char const *argv[]){
   double TransmitionRate = 0.3;
 
   GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate);
-  myTraces._BeginPopBuilt_UserTime = clock();
+  myTraces._BeginPopBuilt_UserTime = get_wall_time();
+  myTraces._BeginPopBuilt_CPUTime = get_cpu_time();
   myGRASP.Construction();
-  myTraces._EndPopBuilt_UserTime = clock();
+  myTraces._EndPopBuilt_CPUTime = get_cpu_time();
+  myTraces._EndPopBuilt_UserTime = get_wall_time();
 
-  myTraces._BeginGenetic_UserTime = clock();
+  myTraces._BeginGenetic_UserTime = get_wall_time();
+  myTraces._BeginGenetic_CPUTime = get_cpu_time();
   myGRASP.GeneticAlgorithm();
-  myTraces._EndGenetic_UserTime = clock();
+  myTraces._EndGenetic_CPUTime = get_cpu_time();
+  myTraces._EndGenetic_UserTime = get_wall_time();
 
   myGRASP.PrintBestLocalisation();
 

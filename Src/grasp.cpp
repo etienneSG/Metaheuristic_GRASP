@@ -2,6 +2,7 @@
 
 #include <string.h>
 #include <iostream>
+//#include <omp.h>
 #include "genetic.h"
 
 
@@ -62,7 +63,7 @@ GRASP::~GRASP()
 void GRASP::Construction()
 {
   // Greedy construction of each localisation
-  #pragma omp parallel for schedule(dynamic,3)
+  //#pragma omp parallel for schedule(dynamic,3)
   for (int i = 0; i < _PopSize; i++)
   {
     _apLoc[i] = new Localisation(_Instance);
@@ -78,7 +79,7 @@ void GRASP::Construction()
   }
 
   // Local Search around each localisation
-  #pragma omp parallel for schedule(dynamic,3)
+  //#pragma omp parallel for schedule(dynamic,3)
   for (int i = 0; i < _PopSize; i++)
   {
     if (!_aEqualLoc[i])
