@@ -18,9 +18,8 @@ void GeneralStats();
 /**
  * Return the typical time of the construction of a localisation and of local search around it
  * @param iInstance     : Instance of the problem to test
- * @param iNbLocalSearch: Number of complete local searches to do
  */
-void TypicalTimeOfLocalisationBuilt(std::string iInstance, int iNbLocalSearch);
+void TypicalTimeOfLocalisationBuilt(std::string iInstance);
 
 
 #endif

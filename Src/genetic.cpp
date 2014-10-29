@@ -1,12 +1,16 @@
 #include "genetic.h"
 
 #include <math.h>
+#include <algorithm>
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
 
 #ifdef __linux__
 #include <omp.h> // Open Multi-Processing Library (Linux only)
+#ifndef NB_PROC
+#define NB_PROC omp_get_num_procs()
+#endif
 #endif
 
 #ifndef INFINITY
@@ -122,7 +126,8 @@ void Genetic::Algorithm()
     
     int i;
     #ifdef __linux__
-    #pragma omp parallel for schedule(dynamic,_PopSize/8)
+    int nbThread = std::max(1,_PopSize/(2*NB_PROC));
+    #pragma omp parallel for schedule(dynamic,nbThread)
     #endif
     for (i = 0; i < int(_PopSize/2); i++)
     {

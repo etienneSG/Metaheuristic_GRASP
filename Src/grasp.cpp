@@ -2,10 +2,14 @@
 
 #include <string.h>
 #include <iostream>
+#include <algorithm>
 #include "genetic.h"
 
 #ifdef __linux__
 #include <omp.h> // Open Multi-Processing Library (Linux only)
+#ifndef NB_PROC
+#define NB_PROC omp_get_num_procs()
+#endif
 #endif
 
 GRASP::GRASP() :
@@ -72,7 +76,8 @@ void GRASP::Construction()
 {
   // Greedy construction of each localisation
   #ifdef __linux__
-  #pragma omp parallel for schedule(dynamic,3)
+  int nbThread = std::max(1,_PopSize/NB_PROC);
+  #pragma omp parallel for schedule(dynamic,nbThread)
   #endif
   for (int i = 0; i < _PopSize; i++)
   {
@@ -90,7 +95,7 @@ void GRASP::Construction()
   
   // Local Search around each localisation
   #ifdef __linux__
-  #pragma omp parallel for schedule(dynamic,3)
+  #pragma omp parallel for schedule(dynamic,nbThread)
   #endif
   for (int i = 0; i < _PopSize; i++)
   {

@@ -5,4 +5,5 @@ mkdir -p TestCases/Output
 make Clean
 make
 
+echo "Calcul des statistiques globales pour chaque instance..."
 ./Bin/MonExec GeneralStats > TestCases/Output/GeneralStats.txt

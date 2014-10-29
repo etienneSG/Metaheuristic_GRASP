@@ -27,14 +27,12 @@ void GeneralStats()
     "TestCases/Input/capc.txt"
   };
   int i;
-  for (i = 0; i < 12; i++)
-    TypicalTimeOfLocalisationBuilt(ListOfTestCases[i], 5);
-  for (i = 12; i < 15; i++)
-    TypicalTimeOfLocalisationBuilt(ListOfTestCases[i], 1);
+  for (i = 0; i < 15; i++)
+    TypicalTimeOfLocalisationBuilt(ListOfTestCases[i]);
 }
 
 
-void TypicalTimeOfLocalisationBuilt(std::string iInstance, int iNbLocalSearch)
+void TypicalTimeOfLocalisationBuilt(std::string iInstance)
 {
   // Creation of the instance
   Testio Instance(iInstance);
@@ -98,8 +96,8 @@ void TypicalTimeOfLocalisationBuilt(std::string iInstance, int iNbLocalSearch)
     Exploration3UserTime = Exploration3UserTime + EndUserTime - BeginUserTime;
     Exploration3CPUTime = Exploration3CPUTime + EndCPUTime - BeginCPUTime;
   }
-
-  for (i = 0; i < iNbLocalSearch; i++)
+  int NbLocalSearch = 5;
+  for (i = 0; i < NbLocalSearch; i++)
   {
     Localisation myLoc(Instance, 0, 0);
 
@@ -119,22 +117,19 @@ void TypicalTimeOfLocalisationBuilt(std::string iInstance, int iNbLocalSearch)
   std::cout.precision(4);
   std::cout << "===== Instance " << iInstance << ":\n";
   std::cout << "Time needed to build the localisation\n";
-  std::cout << "  User time: " << ConstructionUserTime/NbIter << "s\n";
   std::cout << "  CPU time : " << ConstructionCPUTime/NbIter << "s\n";
+  std::cout << "  User time: " << ConstructionUserTime/NbIter << "s\n";
   std::cout << "Time to explore a neighbourhood for Hamming distance equal to 1\n";
-  std::cout << "  User time: " << Exploration1UserTime/NbIter << "s\n";
   std::cout << "  CPU time : " << Exploration1CPUTime/NbIter << "s\n";
+  std::cout << "  User time: " << Exploration1UserTime/NbIter << "s\n";
   std::cout << "Time to explore a neighbourhood for Hamming distance equal to 2\n";
-  std::cout << "  User time: " << Exploration2UserTime/NbIter << "s\n";
   std::cout << "  CPU time : " << Exploration2CPUTime/NbIter << "s\n";
+  std::cout << "  User time: " << Exploration2UserTime/NbIter << "s\n";
   std::cout << "Time to explore a neighbourhood for Hamming distance equal to 3\n";
-  std::cout << "  User time: " << Exploration3UserTime/NbIter << "s\n";
   std::cout << "  CPU time : " << Exploration3CPUTime/NbIter << "s\n";
-  if (iNbLocalSearch > 0)
-  {
-    std::cout << "Time to execute a complete local search\n";
-    std::cout << "  User time: " << LocalSearchUserTime/iNbLocalSearch << "s\n";
-    std::cout << "  CPU time : " << LocalSearchCPUTime/iNbLocalSearch << "s\n";
-  }
+  std::cout << "  User time: " << Exploration3UserTime/NbIter << "s\n";
+  std::cout << "Time to execute a complete local search\n";
+  std::cout << "  CPU time : " << LocalSearchCPUTime/NbLocalSearch << "s\n";
+  std::cout << "  User time: " << LocalSearchUserTime/NbLocalSearch << "s\n";
   std::cout << "\n";
 }

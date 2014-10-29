@@ -79,13 +79,13 @@ int main (int argc, char const *argv[]){
   else
   {
     std::string Instance = Argument1;
-    int PopSize = 18;
+    int PopSize = 16;
     int MaxHamming = 3;
     int RCLLength = 3;
     double MutationRate = 0.5;
     double TransmitionRate = 0.3;
     int MaxNbGenerations = 100;
-    int InfMeanDiff = 0.002;
+    double InfMeanDiff = 0.002;
     Traces ExecTraces;
     ExecTraces.Initialize(PopSize, MaxNbGenerations);
   
@@ -101,7 +101,17 @@ int main (int argc, char const *argv[]){
     myGRASP.GeneticAlgorithm();
     ExecTraces._EndGenetic_CPUTime = get_cpu_time();
     ExecTraces._EndGenetic_UserTime = get_wall_time();
- 
+
+    std::cout << "===== Parameters\n";
+    std::cout << "Size of the population: " << PopSize << "\n";
+    std::cout << "Maximal Hamming Distance: " << MaxHamming << "\n";
+    std::cout << "Length of RCl (restricted candidates list): " << RCLLength << "\n";
+    std::cout << "Mutation rate: " << MutationRate << "\n";
+    std::cout << "Transmition rate: " << TransmitionRate << "\n";
+    std::cout << "Maximal number of generation in genetic algorithm: " << MaxNbGenerations << "\n";
+    std::cout << "Mean difference of the costs of the population from which stop: " << InfMeanDiff << "\n";
+    std::cout << "\n";
+    std::cout << "===== Result of the metaheuristic\n";
     myGRASP.PrintBestLocalisation();
     ExecTraces.PostTreatment();
   }
