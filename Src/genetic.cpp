@@ -121,9 +121,9 @@ void Genetic::Algorithm()
     int * IdxOfIndividuals = _Population.Random();
     
     int i;
-    //#ifdef __linux__
-    //#pragma omp parallel for schedule(dynamic,_PopSize/8)
-    //#endif
+    #ifdef __linux__
+    #pragma omp parallel for schedule(dynamic,_PopSize/8)
+    #endif
     for (i = 0; i < int(_PopSize/2); i++)
     {
       Localisation * Individual1 = _apLoc[ IdxOfIndividuals[2*i] ];
@@ -137,7 +137,7 @@ void Genetic::Algorithm()
       }
       
       //reproduction: replace random factories of Individual2 by some of Individual1
-      int NbGenesToTransmit = int(_TransmitionRate*_apLoc[0]->GetNbFactories());
+      int NbGenesToTransmit = int((1-_TransmitionRate)*_apLoc[0]->GetNbFactories());
       int * IdxOfGenes = _GeneToTransmit.Random();
       int j;
       for (j = 0; j < NbGenesToTransmit; j++)

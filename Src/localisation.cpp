@@ -7,7 +7,9 @@
 #include <assert.h>
 #include "array2d.h"
 #include "kcombinationiterator.h"
+#ifdef _WIN32
 #undef min
+#endif
 #ifdef __linux__
 #include <omp.h> // Open Multi-Processing Library (Linux only)
 #endif
@@ -208,7 +210,8 @@ void Localisation::Construction(int iRCLLength)
 
 bool Localisation::NeighbourhoodSearch(int iNSize)
 {
-  _pTraces->_NbOfIterationsInLoalSearch++;
+  if (_pTraces)
+    _pTraces->_NbOfIterationsInLoalSearch++;
   
   if (iNSize <= 0 || iNSize > std::min(3, _pInstance->NbFactories()) ) {
     std::cout << "It is a stupid use of this method !" << std::endl;
