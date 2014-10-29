@@ -71,9 +71,8 @@ void Test_Etienne()
 int main (int argc, char const *argv[]){
   /* initialize random seed: */
   srand (time(NULL));
-  
-  std::string Instance = "TestCases/Input/cap104.txt";
-  //std::string Instance = argv[1];
+
+  std::string Instance = argv[1] ? argv[1] : "TestCases/Input/cap71.txt";
   int PopSize = 18;
   int MaxHamming = 3;
   int RCLLength = 3;
