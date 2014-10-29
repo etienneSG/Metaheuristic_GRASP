@@ -1,5 +1,4 @@
 #include "localisation.h"
-
 #include <string.h>
 #include <algorithm>
 #include <cstdlib>
@@ -16,6 +15,7 @@
 #define INFINITY 1e+50
 #endif
 
+using namespace std;
 
 Localisation::Localisation():
 _pInstance(0),
@@ -86,7 +86,7 @@ double Localisation::MinDistance(int iClient)
     for(i = j; i < _pInstance->NbFactories(); i++) {
       if (_aChosenFactories[i]) {
         double dist = _pInstance->DistanceCF(iClient,i);
-        m = std::min( dist , m ); 
+        m = min( dist , m ); 
       }
     }
   }
@@ -210,7 +210,7 @@ bool Localisation::NeighbourhoodSearch(int iNSize)
 {
   _pTraces->_NbOfIterationsInLoalSearch++;
   
-  if (iNSize <= 0 || iNSize > std::min(3, _pInstance->NbFactories()) ) {
+  if (iNSize <= 0 || iNSize > min(3, _pInstance->NbFactories()) ) {
     std::cout << "It is a stupid use of this method !" << std::endl;
     return false;
   }
