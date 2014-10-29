@@ -7,7 +7,7 @@
 #include <assert.h>
 #include "array2d.h"
 #include "kcombinationiterator.h"
-
+#undef min
 #ifdef __linux__
 #include <omp.h> // Open Multi-Processing Library (Linux only)
 #endif

@@ -101,7 +101,7 @@ int main (int argc, char const *argv[]){
   ExecTraces.PostTreatment();
   //Test_Tristan();
   //Test_Etienne();
-  
+
   return EXIT_SUCCESS;
 }
 
