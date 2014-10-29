@@ -73,13 +73,14 @@ int main (int argc, char const *argv[]){
   srand (time(NULL));
   
   std::string Instance = "TestCases/Input/cap104.txt";
+  //std::string Instance = argv[1];
   int PopSize = 18;
-  int MaxHamming = 1;
+  int MaxHamming = 3;
   int RCLLength = 3;
   double MutationRate = 0.5;
-  double TransmitionRate = 0.0;
+  double TransmitionRate = 0.3;
   int MaxNbGenerations = 100;
-  int InfMeanDiff = 0.001;
+  int InfMeanDiff = 0.002;
   Traces ExecTraces;
   ExecTraces.Initialize(PopSize, MaxNbGenerations);
   

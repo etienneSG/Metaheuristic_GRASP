@@ -1,0 +1,20 @@
+#!/bin/bash
+
+mkdir -p TestCases/Output
+
+make Clean
+make
+
+./Bin/MonExec TestCases/Input/cap71.txt > TestCases/Output/cap71.txt
+./Bin/MonExec TestCases/Input/cap72.txt > TestCases/Output/cap72.txt
+./Bin/MonExec TestCases/Input/cap73.txt > TestCases/Output/cap73.txt
+./Bin/MonExec TestCases/Input/cap74.txt > TestCases/Output/cap74.txt
+./Bin/MonExec TestCases/Input/cap101.txt > TestCases/Output/cap101.txt
+./Bin/MonExec TestCases/Input/cap102.txt > TestCases/Output/cap102.txt
+./Bin/MonExec TestCases/Input/cap103.txt > TestCases/Output/cap103.txt
+./Bin/MonExec TestCases/Input/cap104.txt > TestCases/Output/cap104.txt
+./Bin/MonExec TestCases/Input/cap131.txt > TestCases/Output/cap131.txt
+./Bin/MonExec TestCases/Input/cap132.txt > TestCases/Output/cap132.txt
+./Bin/MonExec TestCases/Input/cap133.txt > TestCases/Output/cap133.txt
+./Bin/MonExec TestCases/Input/cap134.txt > TestCases/Output/cap134.txt
+

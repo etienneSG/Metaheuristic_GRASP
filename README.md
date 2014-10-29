@@ -15,3 +15,7 @@ Pour Compiler sous un système Windows, utilisez le CmakeLists. Attention, son
 utilisation peut entraîner quelques bogues contrairement à celle du Makefile
 pour les systèmes Unix.
 
+====
+Le script RunCapX est un script bash. Il nettoie le répertoire, compile le
+projet et lance les tests cap71 à cap74, cap101 à cap104 et cap131 à cap134. Les
+fichiers d'output de chacun de ces tests se retrouvent dans TestCases/Output.

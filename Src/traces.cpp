@@ -25,7 +25,7 @@ void Traces::Initialize(int iPopSize, int iMaxNbGenerations)
   _PopSize = iPopSize;
   if (iMaxNbGenerations)
   {
-    _aMeanDiff = new double[iMaxNbGenerations];
+    _aMeanDiff = new double[iMaxNbGenerations+1];
     memset(_aMeanDiff, 0, iMaxNbGenerations*sizeof(double));
   }
 }

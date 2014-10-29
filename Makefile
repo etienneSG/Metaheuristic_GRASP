@@ -11,7 +11,7 @@ BINDIR=Bin
 # Les différentes options de compilations
 # -fopenmp : pour le multithreading
 # -g : mode debug  /  -O6 : optimisé
-CFLAGS=-I Include -g -Wall -pedantic -fopenmp
+CFLAGS=-I Include -O6 -Wall -pedantic -fopenmp
 # Les différents FrameWorks et bibliothèques pour le linkage
 GLLIBS= -lstdc++
 
