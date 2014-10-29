@@ -95,10 +95,10 @@ int main (int argc, char const *argv[]){
   myGRASP.GeneticAlgorithm();
   ExecTraces._EndGenetic_CPUTime = get_cpu_time();
   ExecTraces._EndGenetic_UserTime = get_wall_time();
-  
+ 
   myGRASP.PrintBestLocalisation();
-  
   ExecTraces.PostTreatment();
+
   //Test_Tristan();
   //Test_Etienne();
 

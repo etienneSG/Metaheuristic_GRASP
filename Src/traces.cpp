@@ -4,6 +4,7 @@
 #include <string.h>
 #include <iostream>
 
+
 Traces::Traces() :
 _BeginPopBuilt_UserTime(0),
 _EndPopBuilt_UserTime(0),

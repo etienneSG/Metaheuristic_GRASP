@@ -11,7 +11,6 @@
 
 #include "timetools.h"
 
-
 class Traces
 {
 public:
