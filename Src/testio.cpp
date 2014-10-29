@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string.h>
 #include <string>
+#include <assert.h>
 
 Testio::Testio():
 _NbClients(0),
@@ -68,7 +69,8 @@ _ClientFactoryDistance()
   }
   else
   {
-    std::cerr << "Impossible d'ouvrir le fichier !" << std::endl;
+    std::cout << "Impossible d'ouvrir le fichier !" << std::endl;
+    assert(false);
   }
 }
 

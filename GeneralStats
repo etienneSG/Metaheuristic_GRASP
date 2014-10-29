@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mkdir -p TestCases/Output
+
+make Clean
+make
+
+./Bin/MonExec GeneralStats > TestCases/Output/GeneralStats.txt

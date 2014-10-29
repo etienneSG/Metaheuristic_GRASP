@@ -12,6 +12,7 @@
 #include "kcombination.h"
 #include "grasp.h"
 #include "traces.h"
+#include "generalstats.h"
 
 
 
@@ -72,32 +73,38 @@ int main (int argc, char const *argv[]){
   /* initialize random seed: */
   srand (time(NULL));
 
-  std::string Instance = argv[1] ? argv[1] : "TestCases/Input/cap71.txt";
-  int PopSize = 18;
-  int MaxHamming = 3;
-  int RCLLength = 3;
-  double MutationRate = 0.5;
-  double TransmitionRate = 0.3;
-  int MaxNbGenerations = 100;
-  int InfMeanDiff = 0.002;
-  Traces ExecTraces;
-  ExecTraces.Initialize(PopSize, MaxNbGenerations);
+  std::string Argument1 = argv[1] ? argv[1] : "TestCases/Input/cap71.txt";
+  if (Argument1=="GeneralStats")
+    GeneralStats();
+  else
+  {
+    std::string Instance = Argument1;
+    int PopSize = 18;
+    int MaxHamming = 3;
+    int RCLLength = 3;
+    double MutationRate = 0.5;
+    double TransmitionRate = 0.3;
+    int MaxNbGenerations = 100;
+    int InfMeanDiff = 0.002;
+    Traces ExecTraces;
+    ExecTraces.Initialize(PopSize, MaxNbGenerations);
   
-  GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate, MaxNbGenerations, InfMeanDiff, &ExecTraces);
-  ExecTraces._BeginPopBuilt_UserTime = get_wall_time();
-  ExecTraces._BeginPopBuilt_CPUTime = get_cpu_time();
-  myGRASP.Construction();
-  ExecTraces._EndPopBuilt_CPUTime = get_cpu_time();
-  ExecTraces._EndPopBuilt_UserTime = get_wall_time();
+    GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate, MaxNbGenerations, InfMeanDiff, &ExecTraces);
+    ExecTraces._BeginPopBuilt_UserTime = get_wall_time();
+    ExecTraces._BeginPopBuilt_CPUTime = get_cpu_time();
+    myGRASP.Construction();
+    ExecTraces._EndPopBuilt_CPUTime = get_cpu_time();
+    ExecTraces._EndPopBuilt_UserTime = get_wall_time();
   
-  ExecTraces._BeginGenetic_UserTime = get_wall_time();
-  ExecTraces._BeginGenetic_CPUTime = get_cpu_time();
-  myGRASP.GeneticAlgorithm();
-  ExecTraces._EndGenetic_CPUTime = get_cpu_time();
-  ExecTraces._EndGenetic_UserTime = get_wall_time();
+    ExecTraces._BeginGenetic_UserTime = get_wall_time();
+    ExecTraces._BeginGenetic_CPUTime = get_cpu_time();
+    myGRASP.GeneticAlgorithm();
+    ExecTraces._EndGenetic_CPUTime = get_cpu_time();
+    ExecTraces._EndGenetic_UserTime = get_wall_time();
  
-  myGRASP.PrintBestLocalisation();
-  ExecTraces.PostTreatment();
+    myGRASP.PrintBestLocalisation();
+    ExecTraces.PostTreatment();
+  }
 
   //Test_Tristan();
   //Test_Etienne();

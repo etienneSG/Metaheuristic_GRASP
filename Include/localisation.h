@@ -37,9 +37,6 @@ public:
   /** Destructor */
   ~Localisation();
   
-  /** Construction of the localisation */
-  void Construction();
-  
   /**
    * Create the same localisation except for the the factory iFactory
    * @param iFactory: factory to complement (add/remove)
