@@ -42,6 +42,6 @@ chacun de ces tests se retrouvent dans TestCases/Output.
 
 Le script GeneralStats est un script bash. Il nettoie le répertoire, compile le
 projet et lance le module générant des statistiques à propos de la construction
-gloutonne/aléatoire et des recherches locales. Le fichier d'output de ce module
-se retrouve dans TestCases/Output.
+gloutonne/aléatoire et des recherches locales. Les fichiers d'output de ce
+module se retrouve dans TestCases/GeneralStats.
 
