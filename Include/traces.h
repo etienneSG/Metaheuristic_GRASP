@@ -67,7 +67,13 @@ public:
 
   // Average number of local Enhancement in the local search (iterations / solution)
   int _NbOfLocalEnhancement;
+  
+  // Cost of the best solution after the GRASP method
+  double _GRASPBestCost;
 
+  // Cost of the best solution after the genetic method
+  double _GeneticBestCost;
+  
   //==================================================
   // Data
   

@@ -49,7 +49,10 @@ public:
    * and a local search around the best localisation
    */
   void GeneticAlgorithm();
-  
+
+  /** Return the current best localisation of the population */
+  Localisation * GetBestLocalisation();
+
   /** Print the best localisation found */
   void PrintBestLocalisation();
   

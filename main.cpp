@@ -92,12 +92,20 @@ void Run(std::string iArgument1, std::string iArgument2)
     myGRASP.Construction();
     ExecTraces._EndPopBuilt_CPUTime = get_cpu_time();
     ExecTraces._EndPopBuilt_UserTime = get_wall_time();
-  
+
+    Localisation * TmpBestLoc = myGRASP.GetBestLocalisation();
+    if (TmpBestLoc)
+      ExecTraces._GRASPBestCost = TmpBestLoc->GetLocalisationCost();
+
     ExecTraces._BeginGenetic_UserTime = get_wall_time();
     ExecTraces._BeginGenetic_CPUTime = get_cpu_time();
     myGRASP.GeneticAlgorithm();
     ExecTraces._EndGenetic_CPUTime = get_cpu_time();
     ExecTraces._EndGenetic_UserTime = get_wall_time();
+
+    TmpBestLoc = myGRASP.GetBestLocalisation();
+    if (TmpBestLoc)
+      ExecTraces._GeneticBestCost = TmpBestLoc->GetLocalisationCost();
 
     std::cout << "===== Parameters\n";
     std::cout << "Size of the population: " << PopSize << "\n";
@@ -111,6 +119,8 @@ void Run(std::string iArgument1, std::string iArgument2)
     std::cout << "===== Result of the metaheuristic\n";
     myGRASP.PrintBestLocalisation();
     ExecTraces.PostTreatment();
+
+    TmpBestLoc = 0;
   }
 }
 

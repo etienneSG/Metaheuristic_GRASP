@@ -12,6 +12,10 @@
 #endif
 #endif
 
+#ifndef INFINITY
+#define INFINITY 1e+50
+#endif
+
 GRASP::GRASP() :
 _PopSize(0),
 _MaxHamming(0),
@@ -117,20 +121,44 @@ void GRASP::Construction()
 }
 
 
+Localisation * GRASP::GetBestLocalisation()
+{
+  int IdxBestLoc = -1;
+  double BestCost = INFINITY;
+  int i;
+  for (i = 0; i < _PopSize; i++)
+  {
+    if (_apLoc[i] && BestCost > _apLoc[i]->GetLocalisationCost())
+    {
+      IdxBestLoc = i;
+      BestCost = _apLoc[i]->GetLocalisationCost();
+    }
+  }
+  return IdxBestLoc==-1 ? 0 : _apLoc[IdxBestLoc];
+}
+
+
 void GRASP::GeneticAlgorithm()
 {
   Genetic myGenetic(_PopSize, _apLoc, _MutationRate, _TransmitionRate, _MaxNbGenerations, _InfMeanDiff, _pTraces);
   myGenetic.Algorithm();
   
   // Local search around the best solution of the population
-  _pBestLoc = myGenetic.GetBestLocalisation();
+  _pBestLoc = GetBestLocalisation();
   _pBestLoc->LocalSearchAlgorithm(_MaxHamming);
 }
+
 
 void GRASP::PrintBestLocalisation()
 {
   if (_pBestLoc)
     _pBestLoc->PrintChosenFactories();
   else
-    std::cout << "You are stupid ! You did not perform algoithm !\n";
+  {
+    _pBestLoc = GetBestLocalisation();
+    if (_pBestLoc)
+      _pBestLoc->PrintChosenFactories();
+    else
+      std::cout << "You are stupid ! You did not perform algoithm !\n";
+  }
 }

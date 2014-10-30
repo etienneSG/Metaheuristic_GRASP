@@ -3,7 +3,12 @@
 #include <string>
 #include <string.h>
 #include <iostream>
+#include <cmath>
 
+#ifndef EPSILON
+#include <limits>
+#define EPSILON 1e-7
+#endif
 
 Traces::Traces() :
 _BeginPopBuilt_UserTime(0),
@@ -18,6 +23,8 @@ _aMeanDiff(0),
 _SizeMeanDiff(0),
 _NbOfIterationsInLoalSearch(0),
 _NbOfLocalEnhancement(0),
+_GRASPBestCost(0),
+_GeneticBestCost(0),
 _PopSize(0)
 {
 }
@@ -81,5 +88,13 @@ void Traces::PostTreatment()
   std::cout << "Average number of local search (iterations / solution): " << AverageNbLocalSearch << "\n";
   double AverageNbEnhancement = _NbOfLocalEnhancement*1./(_PopSize+1);
   std::cout << "Average number of local enhancement (enhancements / solution): " << AverageNbEnhancement << "\n";
+  std::cout << "Change of the cost of the best solution between the end of the GRASP construction and the end of the genetic algorithm: ";
+  if ( fabs(_GeneticBestCost-_GRASPBestCost) < EPSILON )
+    std::cout << "NO\n";
+  else
+  {
+    std::cout << "YES\n";
+    std::cout << "  Enhancement of the cost: " << fabs(_GeneticBestCost-_GRASPBestCost) << "\n";
+  }
   std::cout << "\n";
 }
