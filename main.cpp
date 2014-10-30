@@ -69,16 +69,13 @@ void Test_Etienne()
 }
 
 
-int main (int argc, char const *argv[]){
-  /* initialize random seed: */
-  srand (time(NULL));
-
-  std::string Argument1 = argv[1] ? argv[1] : "TestCases/Input/cap71.txt";
-  if (Argument1=="GeneralStats")
+void Run(std::string iArgument1)
+{
+  if (iArgument1=="GeneralStats")
     GeneralStats();
   else
   {
-    std::string Instance = Argument1;
+    std::string Instance = iArgument1;
     int PopSize = 16;
     int MaxHamming = 3;
     int RCLLength = 3;
@@ -115,7 +112,16 @@ int main (int argc, char const *argv[]){
     myGRASP.PrintBestLocalisation();
     ExecTraces.PostTreatment();
   }
+}
 
+
+int main (int argc, char const *argv[]){
+  /* initialize random seed: */
+  srand (time(NULL));
+
+  std::string Argument1 = argv[1] ? argv[1] : "TestCases/Input/cap71.txt";
+
+  Run(Argument1);
   //Test_Tristan();
   //Test_Etienne();
 
