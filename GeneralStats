@@ -7,7 +7,7 @@ make
 
 for instance in TestCases/Input/*.txt
 do
-    echo "Calcul des statistiques globales de l'instance" $instance
+    echo "Calcul des statistiques globales de l'instance " $instance
     output=${instance/Input/GeneralStats}
     ./Bin/MonExec $instance GeneralStats > $output
 done
