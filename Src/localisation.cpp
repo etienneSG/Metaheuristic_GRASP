@@ -210,9 +210,6 @@ void Localisation::Construction(int iRCLLength)
 
 bool Localisation::NeighbourhoodSearch(int iNSize)
 {
-  if (_pTraces)
-    _pTraces->_NbOfIterationsInLoalSearch++;
-  
   if (iNSize <= 0 || iNSize > std::min(3, _pInstance->NbFactories()) ) {
     std::cout << "It is a stupid use of this method !" << std::endl;
     return false;
@@ -275,6 +272,8 @@ void Localisation::LocalSearchAlgorithm(int iMaxSize)
     if (NeighbourhoodSearch(NeighbourhoodSize))
     {
       NeighbourhoodSize = 1;
+      if (_pTraces)
+	_pTraces->_NbOfIterationsInLoalSearch++;
       continue;
     }
     else if (NeighbourhoodSize < iMaxSize)
