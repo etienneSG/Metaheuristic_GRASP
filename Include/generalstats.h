@@ -11,13 +11,16 @@
 #include <string>
 
 
-/** Return some general statistics about the execution of the problem */
-void GeneralStats();
+/**
+ * Return some general statistics about the execution of the problem
+ * @param iInstance: Instance of the problem to test
+ */
+void GeneralStats(std::string iInstance);
 
 
 /**
  * Return the typical time of the construction of a localisation and of local search around it
- * @param iInstance     : Instance of the problem to test
+ * @param iInstance: Instance of the problem to test
  */
 void TypicalTimeOfLocalisationBuilt(std::string iInstance);
 

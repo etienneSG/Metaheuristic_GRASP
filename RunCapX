@@ -5,34 +5,9 @@ mkdir -p TestCases/Output
 make Clean
 make
 
-echo "Recherche de l'instance cap71"
-./Bin/MonExec TestCases/Input/cap71.txt > TestCases/Output/cap71.txt
-echo "Recherche de l'instance cap72"
-./Bin/MonExec TestCases/Input/cap72.txt > TestCases/Output/cap72.txt
-echo "Recherche de l'instance cap73"
-./Bin/MonExec TestCases/Input/cap73.txt > TestCases/Output/cap73.txt
-echo "Recherche de l'instance cap74"
-./Bin/MonExec TestCases/Input/cap74.txt > TestCases/Output/cap74.txt
-echo "Recherche de l'instance cap101"
-./Bin/MonExec TestCases/Input/cap101.txt > TestCases/Output/cap101.txt
-echo "Recherche de l'instance cap102"
-./Bin/MonExec TestCases/Input/cap102.txt > TestCases/Output/cap102.txt
-echo "Recherche de l'instance cap103"
-./Bin/MonExec TestCases/Input/cap103.txt > TestCases/Output/cap103.txt
-echo "Recherche de l'instance cap104"
-./Bin/MonExec TestCases/Input/cap104.txt > TestCases/Output/cap104.txt
-echo "Recherche de l'instance cap131"
-./Bin/MonExec TestCases/Input/cap131.txt > TestCases/Output/cap131.txt
-echo "Recherche de l'instance cap132"
-./Bin/MonExec TestCases/Input/cap132.txt > TestCases/Output/cap132.txt
-echo "Recherche de l'instance cap133"
-./Bin/MonExec TestCases/Input/cap133.txt > TestCases/Output/cap133.txt
-echo "Recherche de l'instance cap134"
-./Bin/MonExec TestCases/Input/cap134.txt > TestCases/Output/cap134.txt
-echo "Recherche de l'instance capa"
-./Bin/MonExec TestCases/Input/capa.txt > TestCases/Output/capa.txt
-echo "Recherche de l'instance capb"
-./Bin/MonExec TestCases/Input/capb.txt > TestCases/Output/capb.txt
-echo "Recherche de l'instance capc"
-./Bin/MonExec TestCases/Input/capc.txt > TestCases/Output/capc.txt
-
+for instance in TestCases/Input/*.txt
+do
+    echo "Recherche de l'instance" $instance
+    output=${instance/Input/Output}
+    ./Bin/MonExec $instance > $output
+done

@@ -69,11 +69,11 @@ void Test_Etienne()
 }
 
 
-void Run(std::string iArgument1)
+void Run(std::string iArgument1, std::string iArgument2)
 {
-  if (iArgument1=="GeneralStats")
-    GeneralStats();
-  else
+  if (iArgument2=="GeneralStats")
+    GeneralStats(iArgument1);
+  else if (iArgument2=="")
   {
     std::string Instance = iArgument1;
     int PopSize = 16;
@@ -119,9 +119,10 @@ int main (int argc, char const *argv[]){
   /* initialize random seed: */
   srand (time(NULL));
 
-  std::string Argument1 = argv[1] ? argv[1] : "TestCases/Input/cap71.txt";
+  std::string Argument1 = argc>1 ? argv[1] : "TestCases/Input/cap71.txt";
+  std::string Argument2 = argc>2 ? argv[2] : "";
 
-  Run(Argument1);
+  Run(Argument1, Argument2);
   //Test_Tristan();
   //Test_Etienne();
   

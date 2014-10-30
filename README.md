@@ -18,13 +18,14 @@ pour les systèmes Unix.
 ====
 Notes pour l'execution:
 
-Deux arguments sont possibles :
+Liste des arguments (dans cet ordre) :
 
-- Chemin_Relatif_Fichier_Instance (Contient le chemin du fichier d'instance
+1) Chemin_Relatif_Fichier_Instance (Contient le chemin du fichier d'instance
 depuis le répertoire de lancement de l'exécutable.)
 
-- GeneralStats (Lance le module de générant des statistiques à propos de la
-construction gloutonne/aléatoire et des recherches locales.)
+2) Pas d'argument (lance la méthode GRASP) ou GeneralStats (lance le module
+générant des statistiques à propos de la construction gloutonne/aléatoire et des
+recherches locales)
 
 ====
 Notes pour le debug et le suivi pas à pas:

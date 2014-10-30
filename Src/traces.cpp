@@ -17,6 +17,7 @@ _EndGenetic_CPUTime(0),
 _aMeanDiff(0),
 _SizeMeanDiff(0),
 _NbOfIterationsInLoalSearch(0),
+_NbOfLocalEnhancement(0),
 _PopSize(0)
 {
 }
@@ -77,6 +78,8 @@ void Traces::PostTreatment()
   std::cout << "===== Other statistics\n";
   std::cout.precision(3);
   double AverageNbLocalSearch = _NbOfIterationsInLoalSearch*1./(_PopSize+1);
-  std::cout << "Average number of local enhancement (iterations / solution): " << AverageNbLocalSearch << "\n";
+  std::cout << "Average number of local search (iterations / solution): " << AverageNbLocalSearch << "\n";
+  double AverageNbEnhancement = _NbOfLocalEnhancement*1./(_PopSize+1);
+  std::cout << "Average number of local enhancement (enhancements / solution): " << AverageNbEnhancement << "\n";
   std::cout << "\n";
 }

@@ -65,6 +65,8 @@ public:
   // Average number of iterations in the local seach (iterations / solution)
   int _NbOfIterationsInLoalSearch;
 
+  // Average number of local Enhancement in the local search (iterations / solution)
+  int _NbOfLocalEnhancement;
 
   //==================================================
   // Data

@@ -1,9 +1,13 @@
 #!/bin/bash
 
-mkdir -p TestCases/Output
+mkdir -p TestCases/GeneralStats
 
 make Clean
 make
 
-echo "Calcul des statistiques globales pour chaque instance..."
-./Bin/MonExec GeneralStats > TestCases/Output/GeneralStats.txt
+for instance in TestCases/Input/*.txt
+do
+    echo "Calcul des statistiques globales de l'instance" $instance
+    output=${instance/Input/GeneralStats}
+    ./Bin/MonExec $instance GeneralStats > $output
+done

@@ -6,29 +6,9 @@
 #include <iostream>
 
 
-void GeneralStats()
+void GeneralStats(std::string iInstance)
 {
-  std::string ListOfTestCases[] =
-  {
-    "TestCases/Input/cap71.txt",
-    "TestCases/Input/cap72.txt",
-    "TestCases/Input/cap73.txt",
-    "TestCases/Input/cap74.txt",
-    "TestCases/Input/cap101.txt",
-    "TestCases/Input/cap102.txt",
-    "TestCases/Input/cap103.txt",
-    "TestCases/Input/cap104.txt",
-    "TestCases/Input/cap131.txt",
-    "TestCases/Input/cap132.txt",
-    "TestCases/Input/cap133.txt",
-    "TestCases/Input/cap134.txt",
-    "TestCases/Input/capa.txt",
-    "TestCases/Input/capb.txt",
-    "TestCases/Input/capc.txt"
-  };
-  int i;
-  for (i = 0; i < 15; i++)
-    TypicalTimeOfLocalisationBuilt(ListOfTestCases[i]);
+  TypicalTimeOfLocalisationBuilt(iInstance);
 }
 
 
