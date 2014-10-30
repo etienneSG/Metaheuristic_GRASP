@@ -79,9 +79,9 @@ void Run(std::string iArgument1)
     int PopSize = 16;
     int MaxHamming = 3;
     int RCLLength = 3;
-    double MutationRate = 0.5;
-    double TransmitionRate = 0.3;
-    int MaxNbGenerations = 100;
+    double MutationRate = 0.1;
+    double TransmitionRate = 0.2;
+    int MaxNbGenerations = 200;
     double InfMeanDiff = 0.002;
     Traces ExecTraces;
     ExecTraces.Initialize(PopSize, MaxNbGenerations);
@@ -124,6 +124,7 @@ int main (int argc, char const *argv[]){
   Run(Argument1);
   //Test_Tristan();
   //Test_Etienne();
+  
 
   return EXIT_SUCCESS;
 }

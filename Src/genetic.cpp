@@ -142,7 +142,7 @@ void Genetic::Algorithm()
       }
       
       //reproduction: replace random factories of Individual2 by some of Individual1
-      int NbGenesToTransmit = int((1-_TransmitionRate)*_apLoc[0]->GetNbFactories());
+      int NbGenesToTransmit = int(_TransmitionRate*_apLoc[0]->GetNbFactories());
       int * IdxOfGenes = _GeneToTransmit.Random();
       int j;
       for (j = 0; j < NbGenesToTransmit; j++)
