@@ -5,18 +5,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
-
 #ifdef __linux__
 #include <omp.h> // Open Multi-Processing Library (Linux only)
-#ifndef NB_PROC
-#define NB_PROC omp_get_num_procs()
 #endif
-#endif
-
-#ifndef INFINITY
-#define INFINITY 1e+50
-#endif
-
+#include "constants.h"
 
 Genetic::Genetic() :
 _PopSize(0),

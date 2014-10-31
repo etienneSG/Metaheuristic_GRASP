@@ -5,10 +5,7 @@
 #include <iostream>
 #include <cmath>
 
-#ifndef EPSILON
-#include <limits>
-#define EPSILON 1e-7
-#endif
+#include "constants.h"
 
 Traces::Traces() :
 _BeginPopBuilt_UserTime(0),

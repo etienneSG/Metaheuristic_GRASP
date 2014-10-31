@@ -7,16 +7,16 @@
 #include <assert.h>
 #include "array2d.h"
 #include "kcombinationiterator.h"
+
 #ifdef _WIN32
 #undef min
 #endif
+
 #ifdef __linux__
 #include <omp.h> // Open Multi-Processing Library (Linux only)
 #endif
 
-#ifndef INFINITY
-#define INFINITY 1e+50
-#endif
+#include "constants.h"
 
 
 Localisation::Localisation():
