@@ -1,4 +1,11 @@
-// Numer of processor core
+//==============================================================================
+// 
+// Constants of the program
+//
+//==============================================================================
+
+
+// Number of processor cores
 #ifdef __linux__
 #ifndef NB_PROC
 #include <omp.h>
