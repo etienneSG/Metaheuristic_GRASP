@@ -159,6 +159,11 @@ void NonOptimalSolutions(std::string iInstance)
   double * aOptimalCosts = new double[NbTest];
   memset(aOptimalCosts, 0, NbTest*sizeof(double));
 
+  // Time to perform algorithm
+  double UserTime = 0;
+  double CPUTime = 0;
+
+
   // Parameters of the algorithm
   std::string Instance = iInstance;
   int PopSize = 16;
@@ -169,16 +174,22 @@ void NonOptimalSolutions(std::string iInstance)
   int MaxNbGenerations = 200;
   double InfMeanDiff = 0.002;
 
-
   int i;
   for (i = 0; i < NbTest; i++)
   {
     GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate, MaxNbGenerations, InfMeanDiff, 0);
+    double BeginUserTime =  get_wall_time();
+    double BeginCPUTime = get_cpu_time();
     myGRASP.Construction();
     myGRASP.GeneticAlgorithm();
+    double EndCPUTime = get_cpu_time();
+    double EndUserTime =  get_wall_time();
     Localisation * BestLoc = myGRASP.GetBestLocalisation();
     if (BestLoc)
       aOptimalCosts[i] = BestLoc->GetLocalisationCost();
+
+    UserTime = UserTime + EndUserTime - BeginUserTime;
+    CPUTime = CPUTime + EndCPUTime - BeginCPUTime;
   }
 
   int NbNonOptimal = 0;
@@ -198,6 +209,12 @@ void NonOptimalSolutions(std::string iInstance)
   if (NbNonOptimal > 0)
     MeanDiff = 100 * MeanDiff / (NbNonOptimal*aInstance[IdxTest]._OptimalValue);
   std::cout << "Averge mean difference of non-optimal solutions with optimum: " << MeanDiff << "%\n";
+  std::cout << "\n";
+
+  std::cout.precision(4);
+  std::cout << "Average time to perform GRASP algorithm:\n";
+  std::cout << "  CPU time : " << CPUTime/NbTest << "s\n";
+  std::cout << "  User time: " << UserTime/NbTest << "s\n";
   std::cout << "\n";
 
   if (aOptimalCosts)
