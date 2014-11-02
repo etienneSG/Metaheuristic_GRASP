@@ -7,6 +7,11 @@
 #include <assert.h>
 #include "array2d.h"
 #include "kcombinationiterator.h"
+#include "constants.h"
+
+#ifdef LOCAL_SEARCH_LIMIT
+#include "timetools.h" // Only if time to perorm local search is limited
+#endif
 
 #ifdef _WIN32
 #undef min
@@ -16,7 +21,6 @@
 #include <omp.h> // Open Multi-Processing Library (Linux only)
 #endif
 
-#include "constants.h"
 
 
 Localisation::Localisation():
@@ -270,13 +274,18 @@ void Localisation::LocalSearchAlgorithm(int iMaxSize)
     return;
   
   int NeighbourhoodSize = 1;
+  #ifdef LOCAL_SEARCH_LIMIT
+  double BeginUserTime = get_wall_time();
+  while (get_wall_time() - BeginUserTime < LOCAL_SEARCH_LIMIT)
+  #else
   while (true)
+  #endif
   {
     if (NeighbourhoodSearch(NeighbourhoodSize))
     {
       NeighbourhoodSize = 1;
       if (_pTraces)
-	_pTraces->_NbOfLocalEnhancement++;
+        _pTraces->_NbOfLocalEnhancement++;
       continue;
     }
     else if (NeighbourhoodSize < iMaxSize)

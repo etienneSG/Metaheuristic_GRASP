@@ -25,7 +25,7 @@
 #endif
 
 // Constant to limit the time of a complete local search
-#ifndef LOCAL_SEARCH_LIMIT
-#define LOCAL_SEARCH_LIMIT 120
-#endif
+//#ifndef LOCAL_SEARCH_LIMIT
+//#define LOCAL_SEARCH_LIMIT 20
+//#endif
 

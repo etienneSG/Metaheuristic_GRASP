@@ -25,6 +25,13 @@ void GeneralStats(std::string iInstance);
 void TypicalTimeOfLocalisationBuilt(std::string iInstance);
 
 
+/**
+ * Return the percentage of non-optimal solutions return by the algorithm
+ * @param iInstance: Instance of the problem to test
+ */
+void NonOptimalSolutions(std::string iInstance);
+
+
 #endif
 
 

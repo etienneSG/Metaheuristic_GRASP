@@ -108,7 +108,8 @@ void Genetic::Algorithm()
   
   int Compt = 0; // Number of generations
   ComputeAverageAndMeanDiff();
-  _pTraces->AddMeanDiff(_MeanDiff);
+  if (_pTraces)
+    _pTraces->AddMeanDiff(_MeanDiff);
   
   while(Compt<_MaxNbGenerations && _MeanDiff > _InfMeanDiff) 
   {
@@ -155,6 +156,7 @@ void Genetic::Algorithm()
     
     // Shutoff parameter
     ComputeAverageAndMeanDiff();
-    _pTraces->AddMeanDiff(_MeanDiff);
+    if (_pTraces)
+      _pTraces->AddMeanDiff(_MeanDiff);
   }
 }

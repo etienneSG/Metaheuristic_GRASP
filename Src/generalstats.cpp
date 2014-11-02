@@ -3,12 +3,18 @@
 #include "testio.h"
 #include "timetools.h"
 #include "localisation.h"
+#include "grasp.h"
+#include "constants.h"
 #include <iostream>
+#include <cmath>
+#include <string.h>
 
 
 void GeneralStats(std::string iInstance)
 {
+  std::cout << "===== Instance " << iInstance << ":\n";
   TypicalTimeOfLocalisationBuilt(iInstance);
+  NonOptimalSolutions(iInstance);
 }
 
 
@@ -95,7 +101,6 @@ void TypicalTimeOfLocalisationBuilt(std::string iInstance)
   }
 
   std::cout.precision(4);
-  std::cout << "===== Instance " << iInstance << ":\n";
   std::cout << "Time needed to build the localisation\n";
   std::cout << "  CPU time : " << ConstructionCPUTime/NbIter << "s\n";
   std::cout << "  User time: " << ConstructionUserTime/NbIter << "s\n";
@@ -112,4 +117,89 @@ void TypicalTimeOfLocalisationBuilt(std::string iInstance)
   std::cout << "  CPU time : " << LocalSearchCPUTime/NbLocalSearch << "s\n";
   std::cout << "  User time: " << LocalSearchUserTime/NbLocalSearch << "s\n";
   std::cout << "\n";
+}
+
+
+void NonOptimalSolutions(std::string iInstance)
+{
+  // Optimal values of the instances
+  static struct {
+    const std::string _TestName;
+    double _OptimalValue;
+  } aInstance[] = {
+    // Test name                    Optimal value
+    {"TestCases/Input/cap71.txt",    932615.75   },
+    {"TestCases/Input/cap72.txt",    977799.4    },
+    {"TestCases/Input/cap73.txt",   1010641.45   },
+    {"TestCases/Input/cap74.txt",   1034976.975  },
+    {"TestCases/Input/cap101.txt",   796648.4375 },
+    {"TestCases/Input/cap102.txt",   854704.2    },
+    {"TestCases/Input/cap103.txt",   893782.1125 },
+    {"TestCases/Input/cap104.txt",   928941.75   },
+    {"TestCases/Input/cap131.txt",   793439.5625 },
+    {"TestCases/Input/cap132.txt",   851495.325  },
+    {"TestCases/Input/cap133.txt",   893076.7125 },
+    {"TestCases/Input/cap134.txt",   928941.75   },
+    {"TestCases/Input/capa.txt",   17156454.4783 },
+    {"TestCases/Input/capb.txt",   12979071.58143},
+    {"TestCases/Input/capc.txt",   11505594.32878}
+  };
+  int IdxTest;
+  for (IdxTest = 0; IdxTest < 15; IdxTest++) {
+    if (aInstance[IdxTest]._TestName == iInstance)
+      break;
+  }
+  if (IdxTest==15) {
+    std::cout << "The optimal value of the problem is unknown. Fill code with it!\n";
+    return;
+  }
+
+  int NbTest = 100;
+  // Array of the found optimal costs
+  double * aOptimalCosts = new double[NbTest];
+  memset(aOptimalCosts, 0, NbTest*sizeof(double));
+
+  // Parameters of the algorithm
+  std::string Instance = iInstance;
+  int PopSize = 16;
+  int MaxHamming = 3;
+  int RCLLength = 3;
+  double MutationRate = 0.1;
+  double TransmitionRate = 0.2;
+  int MaxNbGenerations = 200;
+  double InfMeanDiff = 0.002;
+
+
+  int i;
+  for (i = 0; i < NbTest; i++)
+  {
+    GRASP myGRASP(Instance, PopSize, MaxHamming, RCLLength, MutationRate, TransmitionRate, MaxNbGenerations, InfMeanDiff, 0);
+    myGRASP.Construction();
+    myGRASP.GeneticAlgorithm();
+    Localisation * BestLoc = myGRASP.GetBestLocalisation();
+    if (BestLoc)
+      aOptimalCosts[i] = BestLoc->GetLocalisationCost();
+  }
+
+  int NbNonOptimal = 0;
+  double MeanDiff = 0;
+  for (i = 0; i < NbTest; i++) {
+    double diff = fabs(aOptimalCosts[i]-aInstance[IdxTest]._OptimalValue);
+    if ( diff > EPSILON )
+    {
+      NbNonOptimal++;
+      MeanDiff+=diff;
+    }
+  }
+
+  std::cout.precision(2);
+  std::cout << "Percentage of returned non-optimal solutions: " << NbNonOptimal*1./NbTest << "%\n";
+  std::cout.precision(4);
+  if (NbNonOptimal > 0)
+    MeanDiff/=NbNonOptimal;
+  std::cout << "Averge mean difference of non-optimal solutions with optimum: " << MeanDiff << "\n";
+  std::cout << "\n";
+
+  if (aOptimalCosts)
+    delete [] aOptimalCosts; aOptimalCosts = 0;
 }
