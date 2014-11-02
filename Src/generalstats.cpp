@@ -192,12 +192,12 @@ void NonOptimalSolutions(std::string iInstance)
     }
   }
 
-  std::cout.precision(2);
-  std::cout << "Percentage of returned non-optimal solutions: " << NbNonOptimal*1./NbTest << "%\n";
+  std::cout.precision(3);
+  std::cout << "Percentage of returned non-optimal solutions: " << NbNonOptimal*100./NbTest << "%\n";
   std::cout.precision(4);
   if (NbNonOptimal > 0)
-    MeanDiff/=NbNonOptimal;
-  std::cout << "Averge mean difference of non-optimal solutions with optimum: " << MeanDiff << "\n";
+    MeanDiff = 100 * MeanDiff / (NbNonOptimal*aInstance[IdxTest]._OptimalValue);
+  std::cout << "Averge mean difference of non-optimal solutions with optimum: " << MeanDiff << "%\n";
   std::cout << "\n";
 
   if (aOptimalCosts)
