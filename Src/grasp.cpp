@@ -33,6 +33,7 @@ _RCLLength(iRCLLength),
 _MutationRate(iMutationRate),
 _TransmitionRate(iTransmitionRate),
 _MaxNbGenerations(iMaxNbGeneration),
+_InfMeanDiff(iInfMeanDiff),
 _apLoc(0),
 _pBestLoc(0),
 _aEqualLoc(0),
@@ -79,7 +80,7 @@ void GRASP::Construction()
   for (int i = 0; i < _PopSize; i++)
   {
     _apLoc[i] = new Localisation(_Instance, 0, _pTraces);
-    _apLoc[i]->Construction(_RCLLength);
+    _apLoc[i]->Construction(i==0 ? 1 : _RCLLength); // The first construction must be deterministic
   }
   
   // Optimisation: If there are equal solutions, only perform a local search for one
