@@ -1,9 +1,11 @@
-MPRO - Metaheuristic
+MPRO - Metaheuristiques
 =====
 
-GRASP Methods
+Méthode GRASP
 
-Projet du cours Metaheuristique enseigné au MPRO (2014-2015)
+Projet du cours Metaheuristiques enseigné au MPRO (2014-2015)
+
+La documentation peut être générée avec Doxygen.
 
 =====
 Notes pour la compilation :

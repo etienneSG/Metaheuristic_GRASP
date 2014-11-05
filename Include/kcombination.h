@@ -26,7 +26,7 @@ public:
 
   /**
    * Return an array containing a ramdom k-combinations from a set of n elements
-   * @return: the array of k elements
+   * @return the array of k elements
    */
   int * Random();
    

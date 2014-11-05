@@ -33,7 +33,7 @@ public:
   /**
    * Return the index of the iIdx-th chosen element
    * @param iIdx: one of the k chosen elements
-   * @return: index of the iIdx-th chosen element
+   * @return index of the iIdx-th chosen element
    */
   inline int operator()(int iIdx);
 

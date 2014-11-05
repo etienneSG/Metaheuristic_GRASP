@@ -18,7 +18,7 @@ public:
   
   /**
    * Constructor by specifying numbers of rows and columns
-   * @param iNbRow   : number of array's rows
+   * @param iNbRow:    number of array's rows
    * @param iNbColumn: number of array's column
    */
   Array2d(int iNbRow, int iNbColumn);
@@ -28,7 +28,7 @@ public:
   
   /**
    * Resize the array. (/!\ DELETE THE WHOLE DATA IN THE ARRAY /!\)
-   * @param iNbRow   : new number of array's rows
+   * @param iNbRow:    new number of array's rows
    * @param iNbColumn: new number of array's column
    */
   void Resize(int iNbRow, int iNbColumn);
@@ -41,8 +41,8 @@ public:
 
   /**
    * Reading and writing access to coefficients
-   * @param i : row's index
-   * @param j : column's index
+   * @param i: row's index
+   * @param j: column's index
    */
   inline double& operator()(int i, int j);
   inline const double& operator()(int i, int j)const;

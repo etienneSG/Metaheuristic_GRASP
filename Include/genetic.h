@@ -21,13 +21,13 @@ public:
   
   /** 
    * Constructor
-   * @param iPopSize         : Size of the population
-   * @param iapLocalisation  : Array of the localisation composing the population
-   * @param iMutationRate    : Mutation rate at each generation
-   * @param iTransmitionRate : Rate of genes transmitted by the best parent
+   * @param iPopSize:          Size of the population
+   * @param iapLocalisation:   Array of the localisation composing the population
+   * @param iMutationRate:     Mutation rate at each generation
+   * @param iTransmitionRate:  Rate of genes transmitted by the best parent
    * @param iMaxNbGenerations: Maximal number of generations in genetic algorithm
-   * @param iInfMeanDiff     : Value of mean difference of costs in population from which stop
-   * @param ipTraces         : Traces of the execution
+   * @param iInfMeanDiff:      Value of mean difference of costs in population from which stop
+   * @param ipTraces:          Traces of the execution
    */
   Genetic(int iPopSize, Localisation ** iapLocalisation, double iMutationRate,
           double iTransmitionRate, int iMaxNbGenerations, double iInfMeanDiff,

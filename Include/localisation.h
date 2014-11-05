@@ -21,10 +21,10 @@ public:
   
   /**
    * Constructor from an instance
-   * @param iInstance       : Instance of the problem
+   * @param iInstance:        Instance of the problem
    * @param iChosenFactories: Array of chosen factories. 
    *    If null, every factory is initialize with false.
-   * @param ipTraces        : Traces of the execution
+   * @param ipTraces:         Traces of the execution
    */
   Localisation(Testio &iInstance, bool* iChosenFactories, Traces * ipTraces);
   
@@ -40,7 +40,7 @@ public:
   /**
    * Create the same localisation except for the the factory iFactory
    * @param iFactory: factory to complement (add/remove)
-   * return: the localisation created
+   * return the localisation created
    */
   Localisation CreateComplementedLocalisation(int iFactory);
   
@@ -52,7 +52,7 @@ public:
   
   /**
    * Reading and writing access to factories
-   * @param iFactory : Index of the factory
+   * @param iFactory: Index of the factory
    */
   inline bool& operator()(int iFactory);
   inline const bool& operator()(int iFactory)const;
@@ -61,8 +61,8 @@ public:
    * Return the distance between a client and the closest chosen factory of the localisation
    * (Assume that each distance is positive.)
    * @param iClient: index of the client
-   * @return: minimal distance to the factories if there are chosen factories
-   *          +infinity otherwise
+   * @return minimal distance to the factories if there are chosen factories
+   *         +infinity otherwise
    */
   double MinDistance(int iClient);
 	
@@ -88,8 +88,8 @@ public:
    * Search the best localisation in the neighbourhood of current localisation
    * and actualize the current localisation.
    * @param iNSize: size of the Neighbourhood
-   * @return: true if a better solution was found
-   *          false otherwise
+   * @return true if a better solution was found
+   *         false otherwise
    */
   bool NeighbourhoodSearch(int iNSize);
   
@@ -120,7 +120,7 @@ bool IsEqual(Localisation &iLoc1, Localisation &iLoc2);
  * Sort a array of localisations
  * @param iapLoc: array of pointers on localisations
  * @param iBegin: index of begining of the array
- * @param iEnd  : index of end of the array
+ * @param iEnd:   index of end of the array
  */
 void QuickSort(Localisation ** iapLoc, int iBegin, int iEnd);
 

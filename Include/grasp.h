@@ -24,15 +24,15 @@ public:
   
   /**
    * Constructor
-   * @param iFile            : instance of the problem
-   * @param iPopSize         : Size of the population of solution to generate and use
-   * @param iMaxHamming      : Maximal size of the Hamming distance in the neighbourhood search
-   * @param iRCLLength       : Length of the restricted candidates list during the greedy construction
-   * @param iMutationRate    : Mutation rate at each generation during genetic algorithm
-   * @param iTransmitionRate : Rate of genes transmitted by the best parent during genetic algorithm
+   * @param iFile:             Instance of the problem
+   * @param iPopSize:          Size of the population of solution to generate and use
+   * @param iMaxHamming:       Maximal size of the Hamming distance in the neighbourhood search
+   * @param iRCLLength:        Length of the restricted candidates list during the greedy construction
+   * @param iMutationRate:     Mutation rate at each generation during genetic algorithm
+   * @param iTransmitionRate:  Rate of genes transmitted by the best parent during genetic algorithm
    * @param iMaxNbGenerations: Maximal number of generations in genetic algorithm
-   * @param iInfMeanDiff     : Value of mean difference of costs in population from which stop
-   * @param ipTraces         : Traces of the execution
+   * @param iInfMeanDiff:      Value of mean difference of costs in population from which stop
+   * @param ipTraces:          Traces of the execution
    */
   GRASP(std::string iFile, int iPopSize, int iMaxHamming, int iRCLLength,
         double iMutationRate, double iTransmitionRate, int iMaxNbGenerations, double iInfMeanDiff,

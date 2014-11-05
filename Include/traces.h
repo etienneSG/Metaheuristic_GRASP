@@ -19,7 +19,7 @@ public:
   
   /**
    * Initialize the data of traces
-   * @param iPopSize         : Size of the population of solution to generate and use
+   * @param iPopSize:          Size of the population of solution to generate and use
    * @param iMaxNbGenerations: Maximal number of generations in genetic algorithm
    */
   void Initialize(int iPopSize, int iMaxNbGenerations);
