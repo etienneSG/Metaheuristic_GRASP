@@ -27,6 +27,10 @@ depuis le répertoire de lancement de l'exécutable.)
 générant des statistiques à propos de la construction gloutonne/aléatoire et des
 recherches locales)
 
+Pour limiter le temps utilisateur passé sur chaque recherche locale, il suffit
+de décommenter la ligne de la variable globale correspondante dans le fichier
+constants.h et de choisir une valeur (en seconde).
+
 ====
 Notes pour le debug et le suivi pas à pas:
 

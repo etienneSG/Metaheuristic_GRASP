@@ -29,7 +29,7 @@ MonExec: $(LIBDIR)/main.o $(OBJCPP)
 
 # Création de main.o
 $(LIBDIR)/main.o: main.cpp
-	mkdir -p $(BINDIR) $(LIBDIR) TestCases/Output
+	mkdir -p $(BINDIR) $(LIBDIR)
 	$(CPP) -o $@ -c $< $(CFLAGS)
 
 # Création des différents *.o à partir des *.cpp
